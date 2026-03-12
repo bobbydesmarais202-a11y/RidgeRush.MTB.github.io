@@ -395,6 +395,50 @@
   .game-controls { padding: 0.75rem 2rem; background: rgba(0,0,0,0.3); font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 1px; color: rgba(240,236,224,0.4); border-top: 1px solid rgba(0,180,160,0.1); }
   .game-controls kbd { background: rgba(0,180,160,0.15); border: 1px solid rgba(0,180,160,0.3); padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.7rem; color: var(--teal); }
 
+
+
+  /* FULLSCREEN */
+  .game-panel { position: relative; }
+  .fs-btn {
+    position: absolute; top: 1.1rem; right: 1.2rem;
+    background: rgba(0,180,160,0.12); border: 1px solid rgba(0,180,160,0.3);
+    color: var(--teal); font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+    padding: 0.35rem 0.85rem; cursor: pointer; z-index: 10;
+    transition: all 0.2s;
+    clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+  }
+  .fs-btn:hover { background: rgba(0,180,160,0.28); border-color: var(--teal); }
+  .game-panel:-webkit-full-screen { background: #050d14; display: flex; flex-direction: column; }
+  .game-panel:-moz-full-screen    { background: #050d14; display: flex; flex-direction: column; }
+  .game-panel:fullscreen           { background: #050d14; display: flex; flex-direction: column; }
+  .game-panel:fullscreen .game-canvas-area,
+  .game-panel:-webkit-full-screen .game-canvas-area,
+  .game-panel:-moz-full-screen .game-canvas-area {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+  }
+  .game-panel:fullscreen canvas,
+  .game-panel:-webkit-full-screen canvas,
+  .game-panel:-moz-full-screen canvas {
+    max-width: 100%; max-height: 100%; object-fit: contain;
+  }
+  .game-panel:fullscreen .fs-btn,
+  .game-panel:-webkit-full-screen .fs-btn,
+  .game-panel:-moz-full-screen .fs-btn { top: 1rem; right: 1rem; }
+  /* CONTACT */
+  #contact { background: linear-gradient(160deg, #040c14 0%, #071520 60%, #0a2a1a 100%); position: relative; overflow: hidden; }
+  #contact::before { content:''; position:absolute; inset:0; background-image: repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(0,180,160,0.03) 60px, rgba(0,180,160,0.03) 61px); }
+  .contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; margin-top:2.5rem; position:relative; z-index:1; }
+  .contact-card { background:rgba(10,30,40,0.8); border:1px solid rgba(0,180,160,0.15); padding:2rem 1.8rem; clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px)); transition:transform 0.25s,border-color 0.25s; text-decoration:none; display:block; }
+  .contact-card:hover { transform:translateY(-4px); border-color:rgba(0,180,160,0.4); }
+  .contact-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+  .contact-card.c-email::before   { background:linear-gradient(to right,var(--teal),#00d4bb); }
+  .contact-card.c-phone::before   { background:linear-gradient(to right,var(--coral),#ff9060); }
+  .contact-card.c-youtube::before { background:linear-gradient(to right,#ff0000,#ff6060); }
+  .contact-icon { font-size:2.8rem; margin-bottom:1rem; display:block; }
+  .contact-label { font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:4px; text-transform:uppercase; color:var(--teal); margin-bottom:0.4rem; }
+  .contact-value { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:1px; color:var(--cream); line-height:1.1; word-break:break-all; }
+  .contact-sub { font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; letter-spacing:1px; color:rgba(240,236,224,0.35); margin-top:0.5rem; }
   /* FOOTER */
   footer { background: #040c14; border-top: 1px solid rgba(0,180,160,0.1); padding: 3rem 2.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }
   .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 3px; color: var(--teal); }
@@ -421,7 +465,7 @@
     <li><a href="#practice">Skills Areas</a></li>
     <li><a href="#trails">Trails</a></li>
     <li><a href="#games">Arcade</a></li>
-    <li><a href="#hero">Home</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
@@ -490,6 +534,7 @@
       <a href="#practice" class="btn btn-primary">Skills Areas</a>
       <a href="#trails"   class="btn btn-secondary">All Trails</a>
       <a href="#games"    class="btn btn-secondary">Arcade</a>
+      <a href="#contact"  class="btn btn-secondary">Contact</a>
     </div>
   </div>
   <div class="scroll-hint"><span>Scroll</span><div class="scroll-arrow"></div></div>
@@ -624,22 +669,65 @@
   <div class="section-label">Ridge Arcade</div>
   <h2 class="section-title">Play the<br>Peak</h2>
   <div class="divider"></div>
-  <p style="max-width:500px;color:rgba(240,236,224,0.65);font-size:0.95rem;line-height:1.8;">Two games built right here on the mountain. Fully playable below.</p>
+  <p style="max-width:500px;color:rgba(240,236,224,0.65);font-size:0.95rem;line-height:1.8;">Three classic arcade games, fully playable right here on the mountain.</p>
   <div class="games-layout">
+
+    <!-- TETRIS -->
     <div class="game-panel">
       <div class="game-header">
-        <div class="game-tag">Sandbox · Simulation · 188 Elements</div>
-        <div class="game-title">⬡ Elemental</div>
+        <div class="game-tag">Arcade · Classic · Puzzle</div>
+        <div class="game-title">🟦 Ridge Tetris</div>
+        <button class="fs-btn" onclick="toggleFS(this)">⛶ Fullscreen</button>
       </div>
-      <div style="position:relative;width:100%;height:700px;background:#07080c;">
-        <iframe src="elemental.html" style="width:100%;height:100%;border:none;display:block;" title="Elemental Sandbox Game" allowfullscreen></iframe>
+      <div class="game-canvas-area" style="flex-direction:column;gap:0.5rem;">
+        <div style="display:flex;gap:1.5rem;align-items:flex-start;">
+          <canvas id="tetrisCanvas" width="240" height="480" style="border:1px solid rgba(0,180,160,0.2);"></canvas>
+          <div style="display:flex;flex-direction:column;gap:1rem;min-width:100px;">
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,236,224,0.35);margin-bottom:0.3rem;">SCORE</div>
+              <div id="tetScore" style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--teal);">0</div>
+            </div>
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,236,224,0.35);margin-bottom:0.3rem;">LEVEL</div>
+              <div id="tetLevel" style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--coral);">1</div>
+            </div>
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,236,224,0.35);margin-bottom:0.3rem;">LINES</div>
+              <div id="tetLines" style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--sand);">0</div>
+            </div>
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,236,224,0.35);margin-bottom:0.3rem;">NEXT</div>
+              <canvas id="tetNext" width="80" height="80" style="border:1px solid rgba(0,180,160,0.15);"></canvas>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="game-controls">Click/drag to place elements &nbsp;·&nbsp; 188+ real elements &nbsp;·&nbsp; Full Periodic Table &nbsp;·&nbsp; Heat · Cool · Zap · Grind tools</div>
+      <div class="game-controls">
+        <kbd>←</kbd><kbd>→</kbd> move &nbsp;·&nbsp; <kbd>↑</kbd> rotate &nbsp;·&nbsp; <kbd>↓</kbd> soft drop &nbsp;·&nbsp; <kbd>Space</kbd> hard drop &nbsp;·&nbsp; <kbd>P</kbd> pause
+      </div>
     </div>
+
+    <!-- PAC-MAN -->
+    <div class="game-panel">
+      <div class="game-header">
+        <div class="game-tag">Arcade · Classic · Chase</div>
+        <div class="game-title">👾 Ridge Pac</div>
+        <button class="fs-btn" onclick="toggleFS(this)">⛶ Fullscreen</button>
+      </div>
+      <div class="game-canvas-area">
+        <canvas id="pacCanvas" width="448" height="496"></canvas>
+      </div>
+      <div class="game-controls">
+        <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> move &nbsp;·&nbsp; <kbd>Space</kbd> start &nbsp;·&nbsp; Score: <span id="pacScore">0</span> &nbsp;·&nbsp; Lives: <span id="pacLives">3</span>
+      </div>
+    </div>
+
+    <!-- SERPENT -->
     <div class="game-panel">
       <div class="game-header">
         <div class="game-tag">Arcade · Classic</div>
-        <div class="game-title">Ridge Serpent</div>
+        <div class="game-title">🐍 Ridge Serpent</div>
+        <button class="fs-btn" onclick="toggleFS(this)">⛶ Fullscreen</button>
       </div>
       <div class="game-canvas-area">
         <canvas id="serpentCanvas" width="400" height="340"></canvas>
@@ -648,8 +736,38 @@
         <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> to move &nbsp;·&nbsp; <kbd>Space</kbd> to start/pause &nbsp;·&nbsp; Score: <span id="serpentScore">0</span> &nbsp;·&nbsp; High: <span id="serpentHigh">0</span>
       </div>
     </div>
+
   </div>
 </section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="section-title">Contact</h2>
+  <div class="divider"></div>
+  <p style="max-width:500px;color:rgba(240,236,224,0.65);font-size:0.95rem;line-height:1.8;position:relative;z-index:1;">Reach out for trail tips, collab ideas, or just to talk MTB. Also check out the YouTube channel for riding content.</p>
+  <div class="contact-grid">
+    <a class="contact-card c-email" href="mailto:bobbydesmarais202@gmail.com">
+      <span class="contact-icon">✉️</span>
+      <div class="contact-label">Email</div>
+      <div class="contact-value">bobbydesmarais202@gmail.com</div>
+      <div class="contact-sub">Click to send an email</div>
+    </a>
+    <a class="contact-card c-phone" href="tel:+19548726880">
+      <span class="contact-icon">📱</span>
+      <div class="contact-label">Phone</div>
+      <div class="contact-value">(954) 872-6880</div>
+      <div class="contact-sub">Call or text anytime</div>
+    </a>
+    <a class="contact-card c-youtube" href="https://www.youtube.com/@BobbytheCarCleaner" target="_blank" rel="noopener">
+      <span class="contact-icon">▶️</span>
+      <div class="contact-label">YouTube</div>
+      <div class="contact-value">Bobby the Car Cleaner</div>
+      <div class="contact-sub">Watch on YouTube →</div>
+    </a>
+  </div>
+</section>
+
 
 <footer>
   <div class="footer-logo">RidgeRush<span class="dash">-</span><span class="mtb">MTB</span></div>
@@ -657,7 +775,7 @@
     <a href="#practice">Skills Areas</a>
     <a href="#trails">Trails</a>
     <a href="#games">Arcade</a>
-    <a href="#">Contact</a>
+    <a href="#contact">Contact</a>
   </div>
   <p class="footer-copy">© 2026 RidgeRush-MTB — Ride at your own risk. Helmets required. Broward County MTB pass required at Markham Park &amp; Quiet Waters.</p>
 </footer>
@@ -692,6 +810,7 @@ const TRAILS = [
   {name:"Boomerang",            park:"Markham Park",      loc:"Sunrise, FL",        cat:"markham",      diff:"Easy",     dist:"0.3 mi",  feat:"Flow, Beginner",                desc:"One of the best-rated beginner trails at Markham (4/5). A great easy loop that feeds into the Outback Return section of the park.",                                                      q:"Markham+Park+MTB+Trails+Sunrise+Florida"},
   {name:"Fishing Hole Loop",    park:"Markham Park",      loc:"Sunrise, FL",        cat:"markham",      diff:"Easy",     dist:"0.5 mi",  feat:"Lakeside, Scenic",              desc:"Scenic lakeside loop with wildlife sightings and a relaxed ride through open meadows near the water. Gopher tortoises and birds are frequent companions.",                                  q:"Markham+Park+MTB+Trails+Sunrise+Florida"},
   {name:"Adaptive Loop",        park:"Markham Park",      loc:"Sunrise, FL",        cat:"markham",      diff:"Easy",     dist:"3.1 mi",  feat:"Accessible, Wide",              desc:"The outer loop built for adaptive mountain bikes with hand cranks. Wide, gradual, and welcoming to beginners. One of the few dedicated adaptive MTB loops in Florida.",                     q:"Markham+Park+MTB+Adaptive+Loop+Sunrise+Florida"},
+  {name:"Middle Earth",          park:"Markham Park",      loc:"Sunrise, FL",        cat:"markham",      diff:"Easy",     dist:"0.3 mi",  feat:"Connector, Flow",               desc:"A green-rated connector trail weaving through the trees at Markham Park, linking sections of the trail network for riders building their first full laps. Easy flow with a woodsy feel — true to its name.",                                                                                                                             q:"Markham+Park+MTB+Trails+Sunrise+Florida"},
   {name:"RTE 66",               park:"Markham Park",      loc:"Sunrise, FL",        cat:"markham",      diff:"Moderate", dist:"0.3 mi",  feat:"Flow, Berms, Boardwalk",        desc:"Fast, flowing trail with a new boardwalk on the advanced variant. Commonly linked with Black Snake and Armadillo for a well-rounded loop.",                                                q:"Markham+Park+MTB+Trails+Sunrise+Florida"},
   {name:"Deep Dark Forest",     park:"Markham Park",      loc:"Sunrise, FL",        cat:"markham",      diff:"Moderate", dist:"0.4 mi",  feat:"Roots, Singletrack",            desc:"Winding singletrack through dense forest with plenty of roots. Connects to Rock Garden and can serve as a smoother bypass. Most popular trail in the park.",                              q:"Markham+Park+MTB+Deep+Dark+Forest+Sunrise+Florida"},
   {name:"Armadillo",            park:"Markham Park",      loc:"Sunrise, FL",        cat:"markham",      diff:"Moderate", dist:"0.5 mi",  feat:"Berms, Climbs",                 desc:"Short climbs followed by fast, flowing berms. The trail with the most elevation gain at Markham at 33 ft. Often linked with Black Snake and RTE 66.",                                   q:"Markham+Park+MTB+Armadillo+Sunrise+Florida"},
@@ -751,6 +870,18 @@ const TRAILS = [
   {name:"Santos Trails",        park:"Ocala, FL",         loc:"Florida",            cat:"northamerica", diff:"Easy",     dist:"80 mi+",  feat:"Florida's Best, Flow",          desc:"Florida's crown jewel of mountain biking. 80+ miles of fast, flowing singletrack through the Ocala National Forest. The best MTB destination in the southeast.",                    q:"Santos+MTB+Trails+Ocala+Florida"},
   {name:"Mammoth Bike Park",    park:"Mammoth Lakes, CA", loc:"California",         cat:"northamerica", diff:"Moderate", dist:"80 mi+",  feat:"Lift Access, All Levels",       desc:"World-class lift-accessed bike park in the Eastern Sierra with 80+ miles of trails from beginner-friendly to expert downhill.",                                                    q:"Mammoth+Mountain+Bike+Park+California"},
   {name:"Sun Valley Trails",    park:"Sun Valley, ID",    loc:"Idaho",              cat:"northamerica", diff:"Moderate", dist:"200 mi+", feat:"Alpine, Epic Views",            desc:"Sun Valley's massive trail network spans 200+ miles through the Sawtooth Range. World-class alpine singletrack with breathtaking scenery.",                                         q:"Sun+Valley+MTB+Trails+Idaho"},
+  {name:"Orogenesis",           park:"Canada Border → Cabo San Lucas", loc:"WA · OR · CA · Baja Mexico", cat:"northamerica", diff:"Expert",   dist:"5,000 mi", feat:"World's Longest MTB Route, Bikepacking, Backcountry", desc:"The world's longest mountain bike trail — 5,000 miles of singletrack, gravel roads, and backcountry riding from the US/Canada border in Washington, through Oregon and California, connecting to the Baja Divide all the way to Cabo San Lucas, Mexico. Created by the Orogenesis Collective (founded by Gabriel Amadeus Tiller) and first fully completed in December 2025 by ultra-endurance rider Kurt Refsnider after 5 months on the trail. Connects the Cross-Washington Mountain Bike Route, Oregon Timber Trail, and Baja Divide into one epic spine. About 95% complete with ~200 miles of gaps still being built. The bikepacking equivalent of the Pacific Crest Trail.", q:"Orogenesis+MTB+trail+Canada+Baja+California+bikepacking"},
+  {name:"Great Divide MTB Route",park:"Jasper, AB to Antelope Wells, NM",loc:"Canada to New Mexico",cat:"northamerica",diff:"Expert",dist:"3,084 mi",feat:"Bikepacking Classic, Continental Divide, 200k ft Climbing",desc:"The birthplace of bikepacking and the most iconic off-road route in North America. 3,084 miles tracing the Continental Divide from Jasper, Alberta to the US-Mexico border, 70% unpaved with over 200,000 feet of elevation through Montana, Idaho, Wyoming, Colorado, and New Mexico. Windswept plateaus, alpine passes, and remote frontier towns.",q:"Great+Divide+Mountain+Bike+Route+GDMBR+bikepacking"},
+  {name:"Colorado Trail",park:"Denver to Durango",loc:"Colorado",cat:"northamerica",diff:"Expert",dist:"539 mi",feat:"Triple Crown, Alpine Singletrack, 10k ft Avg Elevation",desc:"539 miles of high-altitude singletrack through the Colorado Rockies. Average elevation of 10,000 feet with 66,000+ feet of total climbing. One of the three routes in the Bikepacking Triple Crown alongside the Great Divide and Arizona Trail. Steep technical climbs, stunning alpine meadows, and a narrow summer weather window.",q:"Colorado+Trail+MTB+bikepacking+Denver+Durango"},
+  {name:"Arizona Trail",park:"US-Mexico Border to Utah",loc:"Arizona",cat:"northamerica",diff:"Expert",dist:"739 mi",feat:"Triple Crown, Grand Canyon Crossing, Desert and Pine Forest",desc:"739 miles through Arizona from the Mexican border to Utah — cactus deserts, pine forests, and the Grand Canyon where riders must carry their bikes across. One of the three legs of the Bikepacking Triple Crown. 65,000+ feet of elevation gain through some of the Southwest's most dramatic landscapes.",q:"Arizona+Trail+MTB+bikepacking+Grand+Canyon"},
+  {name:"Oregon Timber Trail",park:"Lakeview to Columbia River Gorge",loc:"Oregon",cat:"northamerica",diff:"Expert",dist:"668 mi",feat:"Singletrack-Rich, Old-Growth Forest, Technically Demanding",desc:"668 miles bisecting Oregon from the California border to the Columbia River Gorge. Over half the miles on singletrack through old-growth forests, ridgelines, and farmland — one of the most technically challenging long-distance routes in the US. The northern anchor of the Orogenesis megaRoute.",q:"Oregon+Timber+Trail+MTB+bikepacking"},
+  {name:"Baja Divide",park:"San Diego to Cabo San Lucas",loc:"California to Baja Mexico",cat:"northamerica",diff:"Expert",dist:"1,700 mi",feat:"Desert Wilderness, Remote, Backcountry Mexico",desc:"1,700 miles of remote desert bikepacking from San Diego to the southern tip of Baja California. Crosses desert mountains, dry river beds, and isolated coastline with minimal services and maximum solitude. The southern half of the Orogenesis route. Best ridden October through April.",q:"Baja+Divide+MTB+bikepacking+Baja+California+Mexico"},
+  {name:"Maah Daah Hey Trail",park:"Theodore Roosevelt NP",loc:"North Dakota",cat:"northamerica",diff:"Hard",dist:"144 mi",feat:"Badlands Singletrack, Wildlife, Buttes",desc:"144 miles of mostly singletrack through the otherworldly North Dakota Badlands between the north and south units of Theodore Roosevelt National Park. Steep creek drainages, clay trail that destroys drivetrains in wet weather, and sweeping grassland views shared with elk, pronghorn, and bison.",q:"Maah+Daah+Hey+Trail+MTB+North+Dakota+Badlands"},
+  {name:"Coconino Loop",park:"Flagstaff and Sedona",loc:"Arizona",cat:"northamerica",diff:"Expert",dist:"240 mi",feat:"Slickrock, Singletrack, 28k ft Climbing, Stage Race Route",desc:"240 miles of singletrack and dirt roads through the canyons and peaks of Northern Arizona. Half the route is Arizona finest singletrack — fast flowy descents into Flagstaff and grippy Sedona slickrock. 28,000 feet of climbing. Hosts a brutal stage race as part of the Arizona Endurance Series. Best tackled over a full week.",q:"Coconino+Loop+MTB+bikepacking+Flagstaff+Sedona+Arizona"},
+  {name:"Trans-Virginia Route",park:"Front Royal to Damascus",loc:"Virginia",cat:"northamerica",diff:"Hard",dist:"473 mi",feat:"Appalachian Singletrack, Rugged East Coast, Waterfalls",desc:"473 miles through Virginia Appalachian Mountains from Front Royal to Damascus. Overgrown sections, brutally rugged terrain, and long hike-a-bike stretches make this one of the toughest east coast bikepacking routes. Stunning old-growth forests, waterfalls, and rumored secret hot springs along the way.",q:"Trans+Virginia+MTB+bikepacking+Appalachian"},
+  {name:"Cross-Washington Route",park:"La Push to Tekoa",loc:"Washington",cat:"northamerica",diff:"Expert",dist:"700 mi",feat:"Coast to Desert, Alpine Passes, Rainforest to Scablands",desc:"700 miles from the Pacific rainforest at La Push to the wheat fields of Tekoa near the Idaho border. Traverses misty old-growth rainforest, snowy Cascade passes, volcanic scablands, and rolling farmland. The northern anchor of the Orogenesis megaRoute. Hosts an annual grand depart race.",q:"Cross+Washington+Mountain+Bike+Route+XWA+bikepacking"},
+  {name:"Trans North Georgia",park:"Tennessee Border to Alabama",loc:"Georgia",cat:"northamerica",diff:"Expert",dist:"350 mi",feat:"Southern Appalachians, Remote, Waterfalls, Gravel",desc:"A gorgeous route stitching together roads and trails through the southern Appalachian mountains of Georgia. Dense deciduous canopies, waterfalls, and remote backcountry terrain. One of four parts of the Southern Highlands Traverse spanning Virginia to Alabama — a must-ride for east coast riders.",q:"Trans+North+Georgia+TNGA+MTB+bikepacking+Appalachian"},
+  {name:"Idaho Hot Springs MTB Route",park:"Boise to Sun Valley",loc:"Idaho",cat:"northamerica",diff:"Hard",dist:"500 mi",feat:"Natural Hot Springs, Alpine Wilderness, Remote Backcountry",desc:"500 miles through Idaho rugged wilderness combining serious mountain riding with the unique reward of natural hot springs along the route. Remote backcountry terrain with dramatic alpine views and geothermal pools to soak your tired legs at the end of each day.",q:"Idaho+Hot+Springs+Mountain+Bike+Route+bikepacking"},
 ];
 
 /* ═════════ FILTER STATE ═════════ */
@@ -835,6 +966,195 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); }
 
 filterTrails();
 
+
+/* ═════════ TETRIS ═════════ */
+(function(){
+  const cv=document.getElementById('tetrisCanvas'),ctx=cv.getContext('2d');
+  const nv=document.getElementById('tetNext'),nctx=nv.getContext('2d');
+  const W=cv.width,H=cv.height,BS=24,COLS=W/BS,ROWS=H/BS;
+  const scoreEl=document.getElementById('tetScore'),levelEl=document.getElementById('tetLevel'),linesEl=document.getElementById('tetLines');
+  const PIECES=[
+    {shape:[[1,1,1,1]],color:'#00d4bb'},
+    {shape:[[1,1],[1,1]],color:'#e8c97a'},
+    {shape:[[1,1,1],[0,1,0]],color:'#c040e0'},
+    {shape:[[1,1,1],[1,0,0]],color:'#ff6b4a'},
+    {shape:[[1,1,1],[0,0,1]],color:'#46a0f0'},
+    {shape:[[1,1,0],[0,1,1]],color:'#2dd28c'},
+    {shape:[[0,1,1],[1,1,0]],color:'#ff4466'},
+  ];
+  let board,cur,next,score,lines,level,running,paused,dropTimer,dropInterval;
+  function newBoard(){return Array.from({length:ROWS},()=>Array(COLS).fill(0));}
+  function randPiece(){const p=PIECES[Math.floor(Math.random()*PIECES.length)];return{shape:p.shape.map(r=>[...r]),color:p.color,x:Math.floor(COLS/2)-Math.floor(p.shape[0].length/2),y:0};}
+  function valid(p,dx,dy,shape){const s=shape||p.shape;return s.every((r,ry)=>r.every((c,cx)=>!c||(p.x+cx+(dx||0)>=0&&p.x+cx+(dx||0)<COLS&&p.y+ry+(dy||0)<ROWS&&(p.y+ry+(dy||0)<0||!board[p.y+ry+(dy||0)][p.x+cx+(dx||0)]))));}
+  function place(){cur.shape.forEach((r,ry)=>r.forEach((c,cx)=>{if(c&&cur.y+ry>=0)board[cur.y+ry][cur.x+cx]=cur.color;}));clearLines();cur=next;next=randPiece();if(!valid(cur,0,0))endGame();}
+  function clearLines(){let cleared=0;for(let r=ROWS-1;r>=0;r--){if(board[r].every(c=>c)){board.splice(r,1);board.unshift(Array(COLS).fill(0));cleared++;r++;}}if(cleared){lines+=cleared;score+=[0,100,300,500,800][cleared]*(level);level=Math.floor(lines/10)+1;dropInterval=Math.max(100,500-level*40);scoreEl.textContent=score;levelEl.textContent=level;linesEl.textContent=lines;}}
+  function rotate(p){const s=p.shape[0].map((_,i)=>p.shape.map(r=>r[i]).reverse());if(valid(p,0,0,s)){p.shape=s;}}
+  function endGame(){running=false;clearInterval(dropTimer);ctx.fillStyle='rgba(5,13,20,0.82)';ctx.fillRect(0,0,W,H);ctx.font="bold 28px 'Bebas Neue',sans-serif";ctx.fillStyle='#ff6b4a';ctx.textAlign='center';ctx.fillText('GAME OVER',W/2,H/2-20);ctx.font="14px 'Barlow Condensed',sans-serif";ctx.fillStyle='rgba(240,236,224,0.6)';ctx.fillText('Press SPACE to restart',W/2,H/2+10);ctx.textAlign='left';}
+  function draw(){
+    ctx.fillStyle='#050d14';ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='rgba(0,180,160,0.04)';ctx.lineWidth=0.5;
+    for(let x=0;x<=W;x+=BS){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+    for(let y=0;y<=H;y+=BS){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+    board.forEach((r,ry)=>r.forEach((c,cx)=>{if(c){ctx.fillStyle=c;ctx.fillRect(cx*BS+1,ry*BS+1,BS-2,BS-2);ctx.fillStyle='rgba(255,255,255,0.12)';ctx.fillRect(cx*BS+1,ry*BS+1,BS-2,4);}}));
+    if(cur){
+      let ghost={...cur,shape:cur.shape.map(r=>[...r])};while(valid(ghost,0,1))ghost.y++;
+      ghost.shape.forEach((r,ry)=>r.forEach((c,cx)=>{if(c){ctx.fillStyle='rgba(255,255,255,0.08)';ctx.fillRect((ghost.x+cx)*BS+1,(ghost.y+ry)*BS+1,BS-2,BS-2);}}));
+      cur.shape.forEach((r,ry)=>r.forEach((c,cx)=>{if(c){ctx.fillStyle=cur.color;ctx.fillRect((cur.x+cx)*BS+1,(cur.y+ry)*BS+1,BS-2,BS-2);ctx.fillStyle='rgba(255,255,255,0.2)';ctx.fillRect((cur.x+cx)*BS+1,(cur.y+ry)*BS+1,BS-2,4);}}));
+    }
+    if(!running&&!board.some(r=>r.some(c=>c))){ctx.fillStyle='rgba(0,180,160,0.07)';ctx.fillRect(0,0,W,H);ctx.font="bold 26px 'Bebas Neue',sans-serif";ctx.fillStyle='#00b4a0';ctx.textAlign='center';ctx.fillText('RIDGE TETRIS',W/2,H/2-20);ctx.font="14px 'Barlow Condensed',sans-serif";ctx.fillStyle='rgba(240,236,224,0.5)';ctx.fillText('Press SPACE to begin',W/2,H/2+10);ctx.textAlign='left';}
+    if(paused){ctx.fillStyle='rgba(5,13,20,0.7)';ctx.fillRect(0,0,W,H);ctx.font="bold 30px 'Bebas Neue',sans-serif";ctx.fillStyle='#e8c97a';ctx.textAlign='center';ctx.fillText('PAUSED',W/2,H/2);ctx.textAlign='left';}
+    nctx.fillStyle='#050d14';nctx.fillRect(0,0,80,80);
+    if(next){const ox=Math.floor((4-next.shape[0].length)/2),oy=Math.floor((4-next.shape.length)/2);next.shape.forEach((r,ry)=>r.forEach((c,cx)=>{if(c){nctx.fillStyle=next.color;nctx.fillRect((ox+cx)*20+1,(oy+ry)*20+1,18,18);}}));}
+  }
+  function start(){board=newBoard();score=0;lines=0;level=1;running=true;paused=false;dropInterval=460;cur=randPiece();next=randPiece();scoreEl.textContent=0;levelEl.textContent=1;linesEl.textContent=0;clearInterval(dropTimer);dropTimer=setInterval(()=>{if(!paused){if(valid(cur,0,1))cur.y++;else place();}draw();},dropInterval);}
+  function loop(){draw();requestAnimationFrame(loop);}
+  draw();loop();
+  document.addEventListener('keydown',e=>{
+    if(e.code==='Space'&&e.target===document.body){e.preventDefault();if(!running)start();return;}
+    if(!running||paused)return;
+    if(e.key==='ArrowLeft'&&valid(cur,-1,0))cur.x--;
+    if(e.key==='ArrowRight'&&valid(cur,1,0))cur.x++;
+    if(e.key==='ArrowDown'){if(valid(cur,0,1))cur.y++;else place();}
+    if(e.key==='ArrowUp')rotate(cur);
+    if(e.code==='Space'){e.preventDefault();while(valid(cur,0,1))cur.y++;place();}
+    if(e.key==='p'||e.key==='P')paused=!paused;
+    draw();
+  });
+})();
+
+/* ═════════ PAC-MAN ═════════ */
+(function(){
+  const cv=document.getElementById('pacCanvas'),ctx=cv.getContext('2d');
+  const scoreEl=document.getElementById('pacScore'),livesEl=document.getElementById('pacLives');
+  const TILE=16,COLS=28,ROWS=31;
+  // Pac-Man maze layout (0=wall,1=dot,2=energizer,3=empty,4=ghost house)
+  const MAP=[
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0],
+    [0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0],
+    [0,2,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,2,0],
+    [0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0],
+    [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+    [0,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0],
+    [0,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0],
+    [0,1,1,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,1,1,0],
+    [0,0,0,0,0,0,1,0,0,0,0,0,3,0,0,3,0,0,0,0,0,1,0,0,0,0,0,0],
+    [0,0,0,0,0,0,1,0,0,0,0,0,3,0,0,3,0,0,0,0,0,1,0,0,0,0,0,0],
+    [0,0,0,0,0,0,1,0,0,3,3,3,3,3,3,3,3,3,3,0,0,1,0,0,0,0,0,0],
+    [0,0,0,0,0,0,1,0,0,3,0,0,0,4,4,0,0,0,3,0,0,1,0,0,0,0,0,0],
+    [1,1,1,1,1,1,1,0,0,3,0,4,4,4,4,4,4,0,3,0,0,1,1,1,1,1,1,1],
+    [3,3,3,3,3,3,3,3,3,3,0,4,4,4,4,4,4,0,3,3,3,3,3,3,3,3,3,3],
+    [1,1,1,1,1,1,1,0,0,3,0,0,0,0,0,0,0,0,3,0,0,1,1,1,1,1,1,1],
+    [0,0,0,0,0,0,1,0,0,3,3,3,3,3,3,3,3,3,3,0,0,1,0,0,0,0,0,0],
+    [0,0,0,0,0,0,1,0,0,3,0,0,0,0,0,0,0,0,3,0,0,1,0,0,0,0,0,0],
+    [0,0,0,0,0,0,1,0,0,3,0,0,0,0,0,0,0,0,3,0,0,1,0,0,0,0,0,0],
+    [0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0],
+    [0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0],
+    [0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0],
+    [0,2,1,1,0,0,1,1,1,1,1,1,1,3,3,1,1,1,1,1,1,1,0,0,1,1,2,0],
+    [0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0],
+    [0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0],
+    [0,1,1,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,1,1,0],
+    [0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0],
+    [0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0],
+    [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  ];
+  const GHOST_COLORS=['#ff4466','#ffb8ff','#00d4ff','#ffb852'];
+  let dots,pac,ghosts,sc,lives,running,frightened,frighTimer,animFrame;
+  function resetDots(){dots=MAP.map(r=>r.map(c=>c));}
+  function resetPac(){pac={x:14,y:23,dx:0,dy:0,ndx:0,ndy:0,px:14*TILE,py:23*TILE,mouth:0.25,mdir:1,dead:false,deathAnim:0};}
+  function resetGhosts(){ghosts=[{x:14,y:11,px:14*TILE,py:11*TILE,dx:0,dy:-1,color:GHOST_COLORS[0],scatter:0},{x:12,y:14,px:12*TILE,py:14*TILE,dx:-1,dy:0,color:GHOST_COLORS[1],scatter:0},{x:14,y:14,px:14*TILE,py:14*TILE,dx:1,dy:0,color:GHOST_COLORS[2],scatter:0},{x:16,y:14,px:16*TILE,py:14*TILE,dx:0,dy:1,color:GHOST_COLORS[3],scatter:0}];}
+  function start(){resetDots();resetPac();resetGhosts();sc=0;lives=3;running=true;frightened=false;frighTimer=0;scoreEl.textContent=0;livesEl.textContent=3;loop();}
+  function canMove(tx,ty){if(tx<0||tx>=COLS)return true;if(ty<0||ty>=ROWS)return false;const c=MAP[ty]?.[tx];return c!==0;}
+  function movePac(){
+    const ntx=Math.round(pac.px/TILE)+pac.ndx,nty=Math.round(pac.py/TILE)+pac.ndy;
+    if(canMove(ntx,nty)){pac.dx=pac.ndx;pac.dy=pac.ndy;}
+    const tx=Math.round(pac.px/TILE),ty=Math.round(pac.py/TILE);
+    const nx=tx+pac.dx,ny=ty+pac.dy;
+    if(canMove(nx,ny)){pac.px+=pac.dx*2;pac.py+=pac.dy*2;}
+    if(pac.px<0)pac.px=COLS*TILE-1;if(pac.px>=COLS*TILE)pac.px=0;
+    pac.mouth+=0.05*pac.mdir;if(pac.mouth>0.22||pac.mouth<0.02)pac.mdir*=-1;
+    const cx=Math.round(pac.px/TILE),cy=Math.round(pac.py/TILE);
+    if(cy>=0&&cy<ROWS&&cx>=0&&cx<COLS){
+      if(dots[cy][cx]===1){dots[cy][cx]=3;sc+=10;scoreEl.textContent=sc;}
+      if(dots[cy][cx]===2){dots[cy][cx]=3;sc+=50;scoreEl.textContent=sc;frightened=true;frighTimer=300;}
+    }
+  }
+  function moveGhosts(){
+    if(frighTimer>0)frighTimer--;else frightened=false;
+    ghosts.forEach(g=>{
+      const SPEED=frightened?1:2;
+      g.px+=g.dx*SPEED;g.py+=g.dy*SPEED;
+      if(g.px<0)g.px=COLS*TILE-1;if(g.px>=COLS*TILE)g.px=0;
+      const tx=Math.round(g.px/TILE),ty=Math.round(g.py/TILE);
+      if(g.px%TILE===0&&g.py%TILE===0){
+        const dirs=[{dx:1,dy:0},{dx:-1,dy:0},{dx:0,dy:1},{dx:0,dy:-1}];
+        const valid=dirs.filter(d=>d.dx!==-g.dx||d.dy!==-g.dy).filter(d=>{const nx=tx+d.dx,ny=ty+d.dy;return canMove(nx,ny);});
+        if(valid.length>0){const d=valid[Math.floor(Math.random()*valid.length)];g.dx=d.dx;g.dy=d.dy;}
+      }
+    });
+  }
+  function checkCollisions(){
+    ghosts.forEach(g=>{
+      const dist=Math.hypot(g.px-pac.px,g.py-pac.py);
+      if(dist<12){
+        if(frightened){sc+=200;scoreEl.textContent=sc;g.px=14*TILE;g.py=14*TILE;}
+        else{lives--;livesEl.textContent=lives;if(lives<=0){running=false;}else{resetPac();}}
+      }
+    });
+  }
+  function drawMaze(){
+    ctx.fillStyle='#050d14';ctx.fillRect(0,0,cv.width,cv.height);
+    MAP.forEach((row,ry)=>row.forEach((cell,cx)=>{
+      if(cell===0){ctx.fillStyle='#1a3a6a';ctx.fillRect(cx*TILE,ry*TILE,TILE,TILE);ctx.strokeStyle='#0f2448';ctx.lineWidth=1;ctx.strokeRect(cx*TILE+0.5,ry*TILE+0.5,TILE-1,TILE-1);}
+    }));
+    dots.forEach((row,ry)=>row.forEach((cell,cx)=>{
+      const px=cx*TILE+TILE/2,py=ry*TILE+TILE/2;
+      if(cell===1){ctx.fillStyle='rgba(240,236,224,0.7)';ctx.beginPath();ctx.arc(px,py,2,0,Math.PI*2);ctx.fill();}
+      if(cell===2){const t=Date.now()/400;ctx.fillStyle=`rgba(255,200,60,${0.6+0.4*Math.sin(t)})`;ctx.beginPath();ctx.arc(px,py,5,0,Math.PI*2);ctx.fill();}
+    }));
+  }
+  function drawPac(){
+    const px=pac.px+TILE/2,py=pac.py+TILE/2,r=TILE/2-1;
+    const angle=Math.atan2(pac.dy,pac.dx)||0;
+    ctx.fillStyle='#ffe040';ctx.beginPath();ctx.moveTo(px,py);ctx.arc(px,py,r,angle+pac.mouth*Math.PI,(angle+2-pac.mouth)*Math.PI);ctx.closePath();ctx.fill();
+  }
+  function drawGhosts(){
+    ghosts.forEach(g=>{
+      const px=g.px+TILE/2,py=g.py+TILE/2,r=TILE/2-1;
+      ctx.fillStyle=frightened?(frighTimer<80&&Math.floor(frighTimer/10)%2===0?'#ffffff':'#2020ff'):g.color;
+      ctx.beginPath();ctx.arc(px,py-2,r,Math.PI,0);ctx.lineTo(px+r,py+r);
+      for(let i=0;i<3;i++){ctx.lineTo(px+r-(i*2*r/3)-r/3,py+r/2);ctx.lineTo(px+r-(i*2*r/3)-r*2/3,py+r);}
+      ctx.closePath();ctx.fill();
+      if(!frightened){ctx.fillStyle='white';ctx.beginPath();ctx.arc(px-3,py-2,3,0,Math.PI*2);ctx.arc(px+3,py-2,3,0,Math.PI*2);ctx.fill();ctx.fillStyle='#00a';ctx.beginPath();ctx.arc(px-3+g.dx,py-2+g.dy,1.5,0,Math.PI*2);ctx.arc(px+3+g.dx,py-2+g.dy,1.5,0,Math.PI*2);ctx.fill();}
+    });
+  }
+  function loop(){
+    if(!running){
+      drawMaze();drawGhosts();drawPac();
+      ctx.fillStyle='rgba(5,13,20,0.8)';ctx.fillRect(0,0,cv.width,cv.height);
+      ctx.font="bold 28px 'Bebas Neue',sans-serif";ctx.fillStyle=lives<=0?'#ff6b4a':'#00b4a0';ctx.textAlign='center';
+      ctx.fillText(lives<=0?'GAME OVER':'RIDGE PAC',cv.width/2,cv.height/2-20);
+      ctx.font="14px 'Barlow Condensed',sans-serif";ctx.fillStyle='rgba(240,236,224,0.5)';
+      ctx.fillText('Press SPACE to '+(lives<=0?'restart':'begin'),cv.width/2,cv.height/2+10);ctx.textAlign='left';
+      return;
+    }
+    movePac();moveGhosts();checkCollisions();
+    drawMaze();drawGhosts();drawPac();
+    animFrame=requestAnimationFrame(loop);
+  }
+  loop();
+  document.addEventListener('keydown',e=>{
+    if(e.code==='Space'&&e.target===document.body){e.preventDefault();if(!running){cancelAnimationFrame(animFrame);start();}return;}
+    if(!running)return;
+    if(e.key==='ArrowUp'){pac.ndx=0;pac.ndy=-1;}
+    if(e.key==='ArrowDown'){pac.ndx=0;pac.ndy=1;}
+    if(e.key==='ArrowLeft'){pac.ndx=-1;pac.ndy=0;}
+    if(e.key==='ArrowRight'){pac.ndx=1;pac.ndy=0;}
+  });
+})();
 /* ═════════ SERPENT ═════════ */
 (function(){
   const cv=document.getElementById('serpentCanvas'),ctx=cv.getContext('2d');
@@ -900,6 +1220,24 @@ filterTrails();
   function loop(){if(!run){draw();requestAnimationFrame(loop);}}
   init();loop();
 })();
+
+/* ═════════ FULLSCREEN ═════════ */
+function toggleFS(btn) {
+  const panel = btn.closest('.game-panel');
+  const isFS = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement;
+  if (!isFS) {
+    (panel.requestFullscreen || panel.webkitRequestFullscreen || panel.mozRequestFullScreen).call(panel);
+    btn.textContent = '✕ Exit';
+  } else {
+    (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen).call(document);
+    btn.textContent = '⛶ Fullscreen';
+  }
+}
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement) {
+    document.querySelectorAll('.fs-btn').forEach(b => b.textContent = '⛶ Fullscreen');
+  }
+});
 </script>
 </body>
 </html>
